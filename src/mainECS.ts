@@ -1,5 +1,5 @@
-import App from "./app/app";
-
+import App from "./app/appECS";
+import ECS from "./app/ecs/ecs";
 
 const gbHeight = 144;
 const gbWidth = 160
