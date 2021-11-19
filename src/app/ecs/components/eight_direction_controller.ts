@@ -74,7 +74,7 @@ export default class EightDirectionController extends Component {
     }
 
     private checkIfCanMove(direction: Direction): boolean{
-      this.lastHitObject = Physics.BoxColliderOverlaps(this.boxCollider, App.ActiveEntities, direction);
+      this.lastHitObject = Physics.BoxColliderOverlaps(this.boxCollider, direction);
       if(this.lastHitObject != null) return false;
       else return true;
     }

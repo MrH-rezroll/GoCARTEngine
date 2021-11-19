@@ -5,6 +5,8 @@ import BoxCollider from './components/box_collider';
 import SpriteRenderer from './components/sprite_renderer';
 import ECS from './ecs/ecs';
 import Input from './ecs/systems/input';
+import Entity from './ecs/entities/entity';
+import { CreatePlayer } from './ecs/entities/player';
 
 export default class App {  
   static _instance: PIXI.Application;
@@ -56,19 +58,19 @@ export default class App {
   static SetupGame() {
     // initial setup of the game state
     this.Stage.removeChildren();
+    let player: Entity = CreatePlayer();
 
-    let player = ECS.Entity();
-    player.name = "Player";
-    player.addComponent(new ECS._components['Health']);
-    player.addComponent(new ECS._components['Physics']);
-    player.addComponent(new ECS._components['BoxCollider']);
-    player.addComponent(new ECS._components['SpriteRenderer']("playerIdle"));
-    player.components['sprite_renderer'].sprite.x = 0;
-    player.components['sprite_renderer'].sprite.y = 0;
-    player.components['sprite_renderer'].sprite.animationSpeed = 0.05;
-    player.components['sprite_renderer'].sprite.play();
-    player.addComponent(new ECS._components['EightDirectionController'](player.components['sprite_renderer'].sprite.transform, player.components['box_collider']));
-    App.Stage.addChild(player.components['sprite_renderer'].sprite);
+    let boulder: Entity = ECS.Entity();
+    boulder.name = "Boulder";
+    boulder.addComponent(new ECS._components['Physics']);
+    boulder.addComponent(new ECS._components['SpriteRenderer']("boulder"));
+    boulder.addComponent(new ECS._components['BoxCollider'](boulder.components['sprite_renderer'].sprite.transform, 16, 8));
+    boulder.components['sprite_renderer'].sprite.x = 64;
+    boulder.components['sprite_renderer'].sprite.y = 96;
+    boulder.components['sprite_renderer'].sprite.animationSpeed = 0.05;
+    boulder.components['sprite_renderer'].sprite.play();
+    boulder.components['box_collider'].offset = {x:0, y:0};
+    App.Stage.addChild(boulder.components['sprite_renderer'].sprite);
   }
 
   static Update(delta: number) {

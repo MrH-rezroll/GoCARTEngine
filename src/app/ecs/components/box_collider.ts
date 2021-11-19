@@ -16,9 +16,10 @@ export default class BoxCollider extends Component{
     isTrigger: boolean;
     transform: Transform;
     offset: {x:number, y:number};
-    constructor(width:number = 1, height:number = 1, isTrigger: boolean = false){
+    constructor(transform: PIXI.Transform, width:number = 1, height:number = 1, isTrigger: boolean = false){
         super();
         this.componentName = "box_collider";
+        this.transform = transform;
         this.height = height;
         this.width = width;
         this.isTrigger = isTrigger;
@@ -27,6 +28,8 @@ export default class BoxCollider extends Component{
 
     static collide(box1: BoxCollider, box2: BoxCollider, direction:Direction = Direction.Any): boolean
     {
+        if (box1 == undefined || box2 == undefined) {return false;}
+
         let ax1: number = box1.transform.position.x + box1.offset.x;
         let ay1: number = box1.transform.position.y + box1.offset.y;
         let ax2: number = ax1+ box1.width;

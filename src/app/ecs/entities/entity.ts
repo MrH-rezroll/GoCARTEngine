@@ -1,5 +1,5 @@
-import { Component } from "./components/component";
-import ECS from "./ecs";
+import { Component } from "../components/component";
+import ECS from "../ecs";
 
 export default class Entity{
     id: string;

@@ -1,4 +1,4 @@
-import Entity from "./entity";
+import Entity from "./entities/entity";
 import Health from "./components/health";
 import BoxCollider from "./components/box_collider";
 import EightDirectionController from "./components/eight_direction_controller";
@@ -9,7 +9,7 @@ import ViewFollow from "./components/view_follow";
 
 export default class ECS{
     static _count: number = 0;
-    static _entities: Object = {Entity};
+    static _entities: Array<Entity>;
     static _components: Object = {
         'Health': Health,
         'BoxCollider': BoxCollider,
@@ -21,10 +21,13 @@ export default class ECS{
     };
 
     static Entity(): Entity {
+        if(ECS._entities == undefined){
+            ECS._entities = new Array<Entity>();
+        }
         let id: string = (new Date()).toString() + (Math.random() * 100000000 | 0).toString() + "_" + ECS._count;
         let entity = new Entity(id);
-        ECS._entities[id] = entity
+        ECS._entities.push(entity);
         ECS._count++;
-        return ECS._entities[id];
+        return ECS._entities[ECS._entities.length-1];
     }
 }
