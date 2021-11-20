@@ -7,6 +7,7 @@ import ECS from './ecs/ecs';
 import Input from './ecs/systems/input';
 import Entity from './ecs/entities/entity';
 import { CreatePlayer } from './ecs/entities/player';
+import { CreateBoulder } from './ecs/entities/boulder';
 
 export default class App {  
   static _instance: PIXI.Application;
@@ -59,18 +60,11 @@ export default class App {
     // initial setup of the game state
     this.Stage.removeChildren();
     let player: Entity = CreatePlayer();
+    let boulder:Entity = CreateBoulder();
 
-    let boulder: Entity = ECS.Entity();
-    boulder.name = "Boulder";
-    boulder.addComponent(new ECS._components['Physics']);
-    boulder.addComponent(new ECS._components['SpriteRenderer']("boulder"));
-    boulder.addComponent(new ECS._components['BoxCollider'](boulder.components['sprite_renderer'].sprite.transform, 16, 8));
-    boulder.components['sprite_renderer'].sprite.x = 64;
-    boulder.components['sprite_renderer'].sprite.y = 96;
-    boulder.components['sprite_renderer'].sprite.animationSpeed = 0.05;
-    boulder.components['sprite_renderer'].sprite.play();
-    boulder.components['box_collider'].offset = {x:0, y:0};
-    App.Stage.addChild(boulder.components['sprite_renderer'].sprite);
+    for(let rLayer:number = 0; rLayer < ECS._components["SpriteRenderer"].totalSpriteLayers; rLayer++){
+        App.Stage.addChild(App.containerLayers[rLayer]);
+    }
   }
 
   static Update(delta: number) {

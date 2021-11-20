@@ -15,15 +15,6 @@ export default class Physics extends Component{
             if(BoxCollider.collide(box, entity.components['box_collider'], direction)){
                 foundObject = entity.components['box_collider'];
             }
-            /*
-            if (entity.stageBehavior.boxColliderComponents.length > 0) {
-                entity.stageBehavior.boxColliderComponents.forEach(boxCollider => {
-                    if(BoxCollider.collide(box, boxCollider, direction)){
-                        foundObject = boxCollider;
-                    }
-                });
-            }
-            */
         });
         return foundObject;
     }
