@@ -8,6 +8,7 @@ import Input from './ecs/systems/input';
 import Entity from './ecs/entities/entity';
 import { CreatePlayer } from './ecs/entities/player';
 import { CreateBoulder } from './ecs/entities/boulder';
+import EightDirectionController from './ecs/systems/eight_direction_controller';
 
 export default class App {  
   static _instance: PIXI.Application;
@@ -62,21 +63,16 @@ export default class App {
     let player: Entity = CreatePlayer();
     let boulder:Entity = CreateBoulder();
 
-    for(let rLayer:number = 0; rLayer < ECS._components["SpriteRenderer"].totalSpriteLayers; rLayer++){
+    for(let rLayer:number = 0; rLayer < SpriteRenderer.totalSpriteLayers; rLayer++){
         App.Stage.addChild(App.containerLayers[rLayer]);
     }
+    
+    ECS.InitializeSystems();
+    ECS.viewFollow.SetupSpriteToFollow(player.components['sprite_renderer'].sprite);
   }
 
   static Update(delta: number) {
-    for (let key of Object.keys(ECS._entities)) {
-      let entity = ECS._entities[key];
-      if (entity.components != undefined){
-        for (let component of Object.keys(entity.components)) {
-            if (entity.components[component].Update != undefined) {
-                entity.components[component].Update();
-            }
-        }
-      }
-    }
+    ECS.eightDirectionController.Update();
+    ECS.viewFollow.Update();
   }
 }

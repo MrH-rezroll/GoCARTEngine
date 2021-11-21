@@ -1,24 +1,26 @@
+import Input from "./systems/input";
+import Physics from "./systems/physics";
+import ViewFollow from "./systems/view_follow";
 import Entity from "./entities/entity";
-import Health from "./components/health";
-import BoxCollider from "./components/box_collider";
-import EightDirectionController from "./components/eight_direction_controller";
-import Physics from "./components/physics";
-import SpriteRenderer from "./components/sprite_renderer";
-import SpriteTiledRenderer from "./components/sprite_tiled_renderer";
-import ViewFollow from "./components/view_follow";
+import Collision from "./systems/collision";
+import EightDirectionController from "./systems/eight_direction_controller";
 
 export default class ECS{
     static _count: number = 0;
     static _entities: Array<Entity>;
-    static _components: Object = {
-        'Health': Health,
-        'BoxCollider': BoxCollider,
-        'EightDirectionController': EightDirectionController,
-        'Physics': Physics,
-        'SpriteRenderer': SpriteRenderer,
-        'SpriteTiledRenderer': SpriteTiledRenderer,
-        'ViewFollow': ViewFollow
-    };
+    static collision: Collision;
+    static eightDirectionController: EightDirectionController;
+    static input: Input;
+    static physics: Physics;
+    static viewFollow: ViewFollow;
+
+    static InitializeSystems(){
+        ECS.collision = new Collision();
+        ECS.eightDirectionController = new EightDirectionController();
+        ECS.input = new Input();
+        ECS.physics = new Physics();
+        ECS.viewFollow = new ViewFollow();
+    }
 
     static Entity(): Entity {
         if(ECS._entities == undefined){
