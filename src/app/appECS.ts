@@ -9,6 +9,7 @@ import Entity from './ecs/entities/entity';
 import { CreatePlayer } from './ecs/entities/player';
 import { CreateBoulder } from './ecs/entities/boulder';
 import EightDirectionController from './ecs/systems/eight_direction_controller';
+import { CreateTreeElm } from './ecs/entities/tree_elm';
 
 export default class App {  
   static _instance: PIXI.Application;
@@ -62,11 +63,12 @@ export default class App {
     this.Stage.removeChildren();
     let player: Entity = CreatePlayer();
     let boulder:Entity = CreateBoulder();
+    let treeElm1:Entity = CreateTreeElm();
 
     for(let rLayer:number = 0; rLayer < SpriteRenderer.totalSpriteLayers; rLayer++){
         App.Stage.addChild(App.containerLayers[rLayer]);
     }
-    
+
     ECS.InitializeSystems();
     ECS.viewFollow.SetupSpriteToFollow(player.components['sprite_renderer'].sprite);
   }

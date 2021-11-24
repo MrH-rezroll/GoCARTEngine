@@ -16,7 +16,17 @@ export default class Entity{
     }
 
     public addComponent(component: Component) {
-        this.components[component.componentName] = component;
+        let componentAmount:number = 0;
+        for(const currComponent in this.components){
+            if(this.components[currComponent].componentName == component.componentName){
+                componentAmount++;
+            }
+        }
+        let componentSuffix = "";
+        if (componentAmount > 0){
+            componentSuffix = "_" + componentAmount.toString();
+        }
+        this.components[component.componentName + componentSuffix] = component;
     }
 
     public removeComponent(componentName: string){
