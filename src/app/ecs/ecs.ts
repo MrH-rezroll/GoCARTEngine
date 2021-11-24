@@ -4,6 +4,7 @@ import ViewFollow from "./systems/view_follow";
 import Entity from "./entities/entity";
 import Collision from "./systems/collision";
 import EightDirectionController from "./systems/eight_direction_controller";
+import Rendering from "./systems/rendering";
 
 export default class ECS{
     static _count: number = 0;
@@ -13,6 +14,7 @@ export default class ECS{
     static input: Input;
     static physics: Physics;
     static viewFollow: ViewFollow;
+    static rendering: Rendering;
 
     static InitializeSystems(){
         ECS.collision = new Collision();
@@ -20,6 +22,7 @@ export default class ECS{
         ECS.input = new Input();
         ECS.physics = new Physics();
         ECS.viewFollow = new ViewFollow();
+        ECS.rendering = new Rendering();
     }
 
     static Entity(): Entity {

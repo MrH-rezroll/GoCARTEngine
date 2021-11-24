@@ -20,6 +20,5 @@ export function CreatePlayer():Entity {
     player.components['sprite_renderer'].sprite.y = 0;
     player.components['sprite_renderer'].sprite.animationSpeed = 0.05;
     player.components['sprite_renderer'].sprite.play();
-    App.containerLayers[player.components['sprite_renderer'].layer].addChild(player.components['sprite_renderer'].sprite);
     return player;
 }

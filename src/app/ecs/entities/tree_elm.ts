@@ -18,7 +18,5 @@ export function CreateTreeElm():Entity {
     tree.components['sprite_renderer'].sprite.animationSpeed = 0.05;
     tree.components['sprite_renderer'].sprite.play();
     tree.components['box_collider'].offset = {x:22, y:8};
-    App.containerLayers[tree.components['sprite_renderer'].layer].addChild(tree.components['sprite_renderer'].sprite);
-    App.containerLayers[tree.components['sprite_renderer_1'].layer].addChild(tree.components['sprite_renderer_1'].sprite);
     return tree;
 }

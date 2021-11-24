@@ -65,12 +65,9 @@ export default class App {
     let boulder:Entity = CreateBoulder();
     let treeElm1:Entity = CreateTreeElm();
 
-    for(let rLayer:number = 0; rLayer < SpriteRenderer.totalSpriteLayers; rLayer++){
-        App.Stage.addChild(App.containerLayers[rLayer]);
-    }
-
     ECS.InitializeSystems();
     ECS.viewFollow.SetupSpriteToFollow(player.components['sprite_renderer'].sprite);
+    ECS.rendering.SetupSprites();
   }
 
   static Update(delta: number) {

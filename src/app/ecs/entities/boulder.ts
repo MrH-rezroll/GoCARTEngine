@@ -14,6 +14,5 @@ export function CreateBoulder():Entity {
     boulder.components['sprite_renderer'].sprite.animationSpeed = 0.05;
     boulder.components['sprite_renderer'].sprite.play();
     boulder.components['box_collider'].offset = {x:0, y:0};
-    App.containerLayers[boulder.components['sprite_renderer'].layer].addChild(boulder.components['sprite_renderer'].sprite);
     return boulder;
 }
