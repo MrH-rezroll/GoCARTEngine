@@ -11,6 +11,7 @@ import { CreateBoulder } from './ecs/entities/boulder';
 import EightDirectionController from './ecs/systems/eight_direction_controller';
 import { CreateTreeElm } from './ecs/entities/tree_elm';
 import { CreateHouseSmall } from './ecs/entities/house_small';
+import { CreateGrass } from './ecs/entities/grass';
 
 export default class App {  
   static _instance: PIXI.Application;
@@ -66,6 +67,7 @@ export default class App {
     let boulder:Entity = CreateBoulder("Boulder Small 1", 64, 96);
     let treeElm1:Entity = CreateTreeElm("Tree Elm 1", 32, 32);
     let houseSmall1:Entity = CreateHouseSmall("House Small 1", 192, 52);
+    let grass:Entity = CreateGrass("Grass", 1000, 1000);
 
     ECS.InitializeSystems();
     ECS.viewFollow.SetupSpriteToFollow(player.components['sprite_renderer'].sprite);

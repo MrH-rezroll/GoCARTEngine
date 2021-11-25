@@ -7,6 +7,7 @@ export default class Rendering extends System{
     systemName = "Rendering";
     
     public SetupSprites(): void {
+        this.addTiledBackgrounds();
         this.addSpritesToContainers();
         this.addContainersToStage();
     }
@@ -32,6 +33,16 @@ export default class Rendering extends System{
                     }
                     entity.components[currComponent].sprite.play();
                     App.containerLayers[entity.components[currComponent].layer].addChild(entity.components[currComponent].sprite);
+                }
+            }
+        });
+    }
+
+    private addTiledBackgrounds():void{
+        ECS._entities.forEach(entity => {
+            for(const currComponent in entity.components){
+                if(entity.components[currComponent].componentName == "sprite_tiled_renderer"){
+                    App.Stage.addChild(entity.components[currComponent].sprite);
                 }
             }
         });
