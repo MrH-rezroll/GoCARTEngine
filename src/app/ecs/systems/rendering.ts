@@ -21,7 +21,16 @@ export default class Rendering extends System{
     private addSpritesToContainers():void{
         ECS._entities.forEach(entity => {
             for(const currComponent in entity.components){
+                if(entity.components[currComponent] == entity.components['sprite_renderer']){
+                    entity.components[currComponent].sprite.x = entity.defaultX;
+                    entity.components[currComponent].sprite.y = entity.defaultY;
+                }
                 if(entity.components[currComponent].componentName == "sprite_renderer"){
+                    if(entity.components[currComponent] != entity.components['sprite_renderer']){
+                        entity.components[currComponent].sprite.x = entity.components['sprite_renderer'].sprite.x + entity.components[currComponent].offset.x;
+                        entity.components[currComponent].sprite.y = entity.components['sprite_renderer'].sprite.y + entity.components[currComponent].offset.y;
+                    }
+                    entity.components[currComponent].sprite.play();
                     App.containerLayers[entity.components[currComponent].layer].addChild(entity.components[currComponent].sprite);
                 }
             }

@@ -25,12 +25,12 @@ export default class ECS{
         ECS.rendering = new Rendering();
     }
 
-    static Entity(): Entity {
+    static Entity(name:string = "Entity", x:number = 0, y:number = 0): Entity {
         if(ECS._entities == undefined){
             ECS._entities = new Array<Entity>();
         }
         let id: string = (new Date()).toString() + (Math.random() * 100000000 | 0).toString() + "_" + ECS._count;
-        let entity = new Entity(id);
+        let entity = new Entity(id, name, x, y);
         ECS._entities.push(entity);
         ECS._count++;
         return ECS._entities[ECS._entities.length-1];

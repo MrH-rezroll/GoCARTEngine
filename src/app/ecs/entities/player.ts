@@ -7,18 +7,14 @@ import ECS from "../ecs";
 import Entity from "./entity";
 import PlayerControl from "../components/player_control";
 
-export function CreatePlayer():Entity {
-    let player: Entity = ECS.Entity();
-    player.name = "Player";
+export function CreatePlayer(name:string = "Entity", x:number = 0, y: number = 0):Entity {
+    let player: Entity = ECS.Entity(name, x, y);
     player.addComponent(new Health());
     player.addComponent(new PlayerControl());
     player.components['player_control'].followOnY = true;
     player.components['player_control'].followOnX = true;
     player.addComponent(new SpriteRenderer("playerIdle", 0, 1));
     player.addComponent(new BoxCollider(player.components['sprite_renderer'].sprite.transform, 16, 16));
-    player.components['sprite_renderer'].sprite.x = 0;
-    player.components['sprite_renderer'].sprite.y = 0;
     player.components['sprite_renderer'].sprite.animationSpeed = 0.05;
-    player.components['sprite_renderer'].sprite.play();
     return player;
 }

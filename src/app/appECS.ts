@@ -62,10 +62,10 @@ export default class App {
   static SetupGame() {
     // initial setup of the game state
     this.Stage.removeChildren();
-    let player: Entity = CreatePlayer();
-    let boulder:Entity = CreateBoulder();
-    let treeElm1:Entity = CreateTreeElm();
-    let houseSmall1:Entity = CreateHouseSmall();
+    let player: Entity = CreatePlayer("Player");
+    let boulder:Entity = CreateBoulder("Boulder Small 1", 64, 96);
+    let treeElm1:Entity = CreateTreeElm("Tree Elm 1", 32, 32);
+    let houseSmall1:Entity = CreateHouseSmall("House Small 1", 192, 52);
 
     ECS.InitializeSystems();
     ECS.viewFollow.SetupSpriteToFollow(player.components['sprite_renderer'].sprite);

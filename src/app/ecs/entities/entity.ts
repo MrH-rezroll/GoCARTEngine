@@ -3,14 +3,18 @@ import { Component } from "../components/component";
 export default class Entity{
     id: string;
     name: string;
+    defaultX:number;
+    defaultY:number;
     isActive: boolean;
     tag: string;
     components: Object = {Component};
 
-    constructor(id: string){
+    constructor(id: string, name:string = "Entity", x:number = 0, y:number = 0){
         this.id = id;
-        this.name = "";
+        this.name = name;
         this.tag = "";
+        this.defaultX = x;
+        this.defaultY = y;
         this.isActive = true;
         this.components = {};
     }
