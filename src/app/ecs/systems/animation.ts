@@ -9,7 +9,7 @@ export default class Animation extends System{
     public Update():void{
         ECS._entities.forEach(entity => {
             for(const currComponent in entity.components){
-                if(entity.components[currComponent] == entity.components['player_control']){
+                if(entity.components[currComponent] == entity.components['player_control'] && entity.components['player_control'].GetIsSimulated()){
                     this.animateDirectControlPlayer(entity.components['sprite_renderer']);
                 }
             }
