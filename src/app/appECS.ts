@@ -76,6 +76,7 @@ export default class App {
 
   static Update(delta: number) {
     ECS.eightDirectionController.Update();
+    ECS.animation.Update();
     ECS.viewFollow.Update();
   }
 }

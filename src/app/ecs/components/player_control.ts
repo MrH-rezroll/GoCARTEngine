@@ -14,4 +14,8 @@ export default class PlayerControl extends Component{
         this.followOnX = false;
         this.followOnY = false;
     }
+
+    public IsSimulated():boolean{
+        return this.isSimulated;
+    }
 }
