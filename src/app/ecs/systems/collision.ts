@@ -9,8 +9,12 @@ export default class Collision extends System{
     static BoxColliderOverlaps(box: BoxCollider, direction: Direction = Direction.Any): BoxCollider {
         let foundObject: BoxCollider;
         ECS._entities.forEach(entity => {
-            if(Collision.Collide(box, entity.components['box_collider'], direction)){
-                foundObject = entity.components['box_collider'];
+            for(const currComponent in entity.components){
+                if (entity.components[currComponent].componentName == "box_collider") {
+                    if(Collision.Collide(box, entity.components[currComponent], direction)){
+                        foundObject = entity.components[currComponent];
+                    }
+                }
             }
         });
         return foundObject;
