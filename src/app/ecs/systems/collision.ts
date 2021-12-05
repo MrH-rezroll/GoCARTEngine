@@ -2,17 +2,32 @@ import { Direction } from "../components/box_collider";
 import BoxCollider from "../components/box_collider";
 import ECS from "../ecs";
 import System from "./system";
+import Entity from "../entities/entity";
 
 export default class Collision extends System{
     systemName = "Collision";
-    
-    static BoxColliderOverlaps(box: BoxCollider, direction: Direction = Direction.Any): BoxCollider {
-        let foundObject: BoxCollider;
+
+    static BoxColliderOverlaps(box: BoxCollider, direction: Direction = Direction.Any): Entity {
+        let foundObject: Entity;
         ECS._entities.forEach(entity => {
             for(const currComponent in entity.components){
-                if (entity.components[currComponent].componentName == "box_collider") {
+                if (entity.components[currComponent].componentName == "box_collider" && !entity.components[currComponent].isTrigger) {
                     if(Collision.Collide(box, entity.components[currComponent], direction)){
-                        foundObject = entity.components[currComponent];
+                        foundObject = entity;
+                    }
+                }
+            }
+        });
+        return foundObject;
+    }
+
+    static BoxTriggerOverlaps(box: BoxCollider, ignoreId:string, direction: Direction = Direction.Any): Entity {
+        let foundObject: Entity;
+        ECS._entities.forEach(entity => {
+            for(const currComponent in entity.components){
+                if (entity.id != ignoreId && entity.components[currComponent].componentName == "box_collider") {
+                    if(Collision.Collide(box, entity.components[currComponent], direction)){
+                        foundObject = entity;
                     }
                 }
             }

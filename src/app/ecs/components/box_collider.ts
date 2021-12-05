@@ -1,4 +1,5 @@
 import { Transform } from "pixi.js";
+import Entity from "../entities/entity";
 import { Component } from "./component";
 
 export enum Direction {
@@ -16,7 +17,7 @@ export default class BoxCollider extends Component{
     isTrigger: boolean;
     transform: Transform;
     offset: {x:number, y:number};
-    lastHitObject: BoxCollider;
+    lastHitObject: Entity;
     constructor(transform: PIXI.Transform, width:number = 1, height:number = 1, isTrigger: boolean = false){
         super();
         this.componentName = "box_collider";

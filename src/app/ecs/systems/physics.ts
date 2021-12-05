@@ -1,3 +1,4 @@
+import ECS from "../ecs";
 import System from "./system"
 
 export default class Physics extends System{
@@ -5,5 +6,8 @@ export default class Physics extends System{
         super();
         Physics.systemName = "Physics";
     }
-    //TODO: Implement a basic physics system.
+    
+    public Update():void {
+        //TODO: Physics Stuff
+    }
 }

@@ -12,6 +12,7 @@ import EightDirectionController from './ecs/systems/eight_direction_controller';
 import { CreateTreeElm } from './ecs/entities/tree_elm';
 import { CreateHouseSmall } from './ecs/entities/house_small';
 import { CreateGrass } from './ecs/entities/grass';
+import { CreateSign } from './ecs/entities/sign';
 
 export default class App {  
   static _instance: PIXI.Application;
@@ -57,6 +58,7 @@ export default class App {
     // this is the ticker that runs once per frame, let's call our Update() function
     App._instance.ticker.add((delta) => {
       App.Update(delta);
+      App.LateUpdate(delta);
     });
   }
 
@@ -65,6 +67,7 @@ export default class App {
     this.Stage.removeChildren();
     let player: Entity = CreatePlayer("Player");
     let boulder:Entity = CreateBoulder("Boulder Small 1", 64, 96);
+    let sign:Entity = CreateSign("Sign 1", 16, 64);
     let treeElm1:Entity = CreateTreeElm("Tree Elm 1", 32, 32);
     let houseSmall1:Entity = CreateHouseSmall("House Small 1", 192, 52);
     let grass:Entity = CreateGrass("Grass", 1000, 1000);
@@ -78,5 +81,10 @@ export default class App {
     ECS.eightDirectionController.Update();
     ECS.animation.Update();
     ECS.viewFollow.Update();
+    ECS.interactions.Update();
+  }
+
+  static LateUpdate(delta: number) {
+    ECS.interactions.LateUpdate();
   }
 }

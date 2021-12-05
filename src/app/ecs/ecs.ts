@@ -6,6 +6,7 @@ import Collision from "./systems/collision";
 import EightDirectionController from "./systems/eight_direction_controller";
 import Rendering from "./systems/rendering";
 import Animation from "./systems/animation";
+import Interactions from "./systems/interactions";
 
 export default class ECS{
     static _count: number = 0;
@@ -17,6 +18,7 @@ export default class ECS{
     static viewFollow: ViewFollow;
     static rendering: Rendering;
     static animation: Animation;
+    static interactions: Interactions;
 
     static InitializeSystems(){
         ECS.collision = new Collision();
@@ -26,6 +28,7 @@ export default class ECS{
         ECS.viewFollow = new ViewFollow();
         ECS.rendering = new Rendering();
         ECS.animation = new Animation();
+        ECS.interactions = new Interactions();
     }
 
     static Entity(name:string = "Entity", x:number = 0, y:number = 0): Entity {

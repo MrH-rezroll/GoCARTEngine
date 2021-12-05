@@ -1,6 +1,5 @@
 import ECS from "../ecs";
 import System from "./system";
-import App from "../../appECS";
 import SpriteRenderer from "../components/sprite_renderer";
 
 export default class Animation extends System{
