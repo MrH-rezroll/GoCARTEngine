@@ -86,5 +86,6 @@ export default class App {
 
   static LateUpdate(delta: number) {
     ECS.interactions.LateUpdate();
+    ECS.input.LateUpdate();
   }
 }

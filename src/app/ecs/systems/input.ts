@@ -4,8 +4,12 @@ export default class Input{
     down: boolean;
     left: boolean;
     right: boolean;
+    action: boolean;
+
+    private canAction:boolean;
 
     constructor(){
+      this.canAction = true;
         window.onkeydown = (ev: KeyboardEvent): any => {
           switch(ev.key){
             case "w":
@@ -20,6 +24,10 @@ export default class Input{
             case "d":
               this.right = true;
               break;
+              case "e":
+                if(this.canAction){this.action = true}
+                this.canAction = false;
+                break;
             default: break;
           }
         };
@@ -37,8 +45,15 @@ export default class Input{
             case "d":
               this.right = false;
               break;
+              case "e":
+                this.canAction = true;
+                break;
             default: break;
           }
         };
+    }
+
+    public LateUpdate():void {
+      this.action = false;
     }
 }
