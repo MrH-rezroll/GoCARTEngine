@@ -1,3 +1,4 @@
+import App from "../../appECS";
 import BoxCollider from "../../components/box_collider";
 import Interactable from "../components/interactable";
 import ECS from "../ecs";
@@ -69,6 +70,12 @@ export default class Interactions extends System{
     }
 
     private signStart(interactMessage:string):void {
+      if(!App.messageBoxLarge.showMessageLarge){
+        App.messageBoxLarge.showMessageBox();
+      }
+      else {
+        App.messageBoxLarge.hideMessageBox();
+      }
         console.log("Start Interaction: " + interactMessage);
     }
 }

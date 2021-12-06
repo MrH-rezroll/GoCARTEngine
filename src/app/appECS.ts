@@ -13,6 +13,7 @@ import { CreateTreeElm } from './ecs/entities/tree_elm';
 import { CreateHouseSmall } from './ecs/entities/house_small';
 import { CreateGrass } from './ecs/entities/grass';
 import { CreateSign } from './ecs/entities/sign';
+import MessageLarge from './mvc/model/messages_large';
 
 export default class App {  
   static _instance: PIXI.Application;
@@ -27,6 +28,8 @@ export default class App {
   static mapSize: number = 500;
   static spriteSheet: PIXI.Spritesheet;
   static containerLayers: Array<PIXI.Container>;
+  static uiContainer: PIXI.Container;
+  static messageBoxLarge: MessageLarge;
   
   constructor(
     parent: HTMLElement,
@@ -75,6 +78,11 @@ export default class App {
     ECS.InitializeSystems();
     ECS.viewFollow.SetupSpriteToFollow(player.components['sprite_renderer'].sprite);
     ECS.rendering.SetupSprites();
+
+    App.uiContainer = new PIXI.Container();
+    App.messageBoxLarge = new MessageLarge();
+    App.uiContainer.addChild(this.messageBoxLarge.messageBox);
+    App.Stage.addChild(this.uiContainer);
   }
 
   static Update(delta: number) {

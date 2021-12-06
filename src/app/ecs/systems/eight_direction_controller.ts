@@ -18,11 +18,13 @@ export default class EightDirectionController extends System {
     }
 
     public Update():void{
-      for (let key of Object.keys(ECS._entities)) {
-        let entity = ECS._entities[key];
-        if (entity.components['player_control'] != undefined){
-          this.MoveCharacter(entity.components['sprite_renderer'].sprite.transform, entity.components['player_control'].speed, entity.components['box_collider'], entity);
-          entity.components['player_control'].prevPosition = entity.components['sprite_renderer'].sprite.transform.position;
+      if(!App.messageBoxLarge.showMessageLarge){
+        for (let key of Object.keys(ECS._entities)) {
+          let entity = ECS._entities[key];
+          if (entity.components['player_control'] != undefined){
+            this.MoveCharacter(entity.components['sprite_renderer'].sprite.transform, entity.components['player_control'].speed, entity.components['box_collider'], entity);
+            entity.components['player_control'].prevPosition = entity.components['sprite_renderer'].sprite.transform.position;
+          }
         }
       }
     }
