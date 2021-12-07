@@ -10,6 +10,7 @@ import cliffsTop from "./images/cliffs/top/*.png";
 import pathLargeHorz from "./images/path_large/path_large_horz/*.png";
 import pathLargeT from "./images/path_large/path_large_t/*.png";
 import boulder from "./images/boulder/*.png";
+import activeArrow from "./images/active_arrow/*.png";
 import fenceHorzTop from "./images/fence/top/*.png";
 import fenceHorzBottom from "./images/fence/bottom/*.png";
 import villiage_house_small_top from "./images/villiage_house_small/top/*.png";
@@ -29,6 +30,7 @@ const spriteNames = {
   pathLargeHorz: Object.values(pathLargeHorz),
   pathLargeT: Object.values(pathLargeT),
   boulder: Object.values(boulder),
+  activeArrow: Object.values(activeArrow),
   fenceHorzTop: Object.values(fenceHorzTop),
   fenceHorzBottom: Object.values(fenceHorzBottom),
   villiageHouseSmallTop: Object.values(villiage_house_small_top),

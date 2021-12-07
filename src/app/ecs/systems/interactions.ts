@@ -44,6 +44,7 @@ export default class Interactions extends System{
     }
 
     private setInteractables():void{
+      let foundActiveArrow: boolean = false;
         for (let key of Object.keys(ECS._entities)) {
           let entity1 = ECS._entities[key];
           if (entity1.components['interactable'] != undefined){
@@ -53,10 +54,17 @@ export default class Interactions extends System{
                 let overlapObject:Entity = Collision.BoxTriggerOverlaps(entity1.components['box_collider_1'], entity1.id);
                 if(overlapObject != undefined && overlapObject.components['player_control'] != undefined){
                     entity1.components['interactable'].canInteract = true;
+                    App.activeArrowSprite.components['sprite_renderer'].sprite.visible = true;
+                    App.activeArrowSprite.components['sprite_renderer'].sprite.transform.position.x = entity1.components['sprite_renderer'].sprite.transform.position.x + (entity1.components['sprite_renderer'].sprite.width / 2 - App.activeArrowSprite.components['sprite_renderer'].sprite.width / 2);
+                    App.activeArrowSprite.components['sprite_renderer'].sprite.transform.position.y = entity1.components['sprite_renderer'].sprite.transform.position.y - (App.activeArrowSprite.components['sprite_renderer'].sprite.height);
+                    foundActiveArrow = true;
                 }
               }
             }
           }
+        }
+        if (!foundActiveArrow){
+          App.activeArrowSprite.components['sprite_renderer'].sprite.visible = false;
         }
     }
 

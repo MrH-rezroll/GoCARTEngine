@@ -14,6 +14,7 @@ import { CreateHouseSmall } from './ecs/entities/house_small';
 import { CreateGrass } from './ecs/entities/grass';
 import { CreateSign } from './ecs/entities/sign';
 import MessageLarge from './mvc/model/messages_large';
+import { CreateActiveArrow } from './ecs/entities/active_arrow';
 
 export default class App {  
   static _instance: PIXI.Application;
@@ -30,6 +31,7 @@ export default class App {
   static containerLayers: Array<PIXI.Container>;
   static uiContainer: PIXI.Container;
   static messageBoxLarge: MessageLarge;
+  static activeArrowSprite: Entity;
   
   constructor(
     parent: HTMLElement,
@@ -69,6 +71,7 @@ export default class App {
     // initial setup of the game state
     this.Stage.removeChildren();
     let player: Entity = CreatePlayer("Player");
+    App.activeArrowSprite = CreateActiveArrow("Active Arrow", 16, 16);
     let boulder:Entity = CreateBoulder("Boulder Small 1", 64, 96);
     let sign:Entity = CreateSign("Sign 1", 16, 64);
     let treeElm1:Entity = CreateTreeElm("Tree Elm 1", 32, 32);
