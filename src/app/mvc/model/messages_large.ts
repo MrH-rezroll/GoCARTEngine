@@ -39,9 +39,15 @@ export default class MessageLarge{
     private buildMessageBox():void {
         this.messageBox = new Container();
         const box:Graphics = new Graphics();
-        box.beginFill(0xFFFF00);
+        box.beginFill(0x8bac0f);
         box.drawRect(0, 0, this.messageWidth, this.messageHeight);
+        box.endFill();
+        box.beginFill(0x0f380f);
+        box.drawRect(0, 0, this.messageWidth, 4);
+        box.drawRect(0, 0, 4, this.messageHeight);
+        box.drawRect(this.messageWidth - 4, 0, 4, this.messageHeight );
+        box.drawRect(0, this.messageHeight - 4, this.messageWidth, 4);
+        box.endFill();
         this.messageBox.addChild(box);
-        this.hideMessageBox();
     }
 }

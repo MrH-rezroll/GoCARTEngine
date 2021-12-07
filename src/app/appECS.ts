@@ -32,6 +32,8 @@ export default class App {
   static uiContainer: PIXI.Container;
   static messageBoxLarge: MessageLarge;
   static activeArrowSprite: Entity;
+  static stageScrollX: number;
+  static stageScrollY: number;
   
   constructor(
     parent: HTMLElement,
@@ -63,6 +65,8 @@ export default class App {
     // this is the ticker that runs once per frame, let's call our Update() function
     App._instance.ticker.add((delta) => {
       App.Update(delta);
+      App.uiContainer.position.y = -App.Stage.position.y;
+      App.uiContainer.position.x = -App.Stage.position.x;
       App.LateUpdate(delta);
     });
   }
@@ -86,6 +90,9 @@ export default class App {
     App.messageBoxLarge = new MessageLarge();
     App.uiContainer.addChild(this.messageBoxLarge.messageBox);
     App.Stage.addChild(this.uiContainer);
+    App.messageBoxLarge.hideMessageBox();
+    App.stageScrollX = 0;
+    App.stageScrollY = 0;
   }
 
   static Update(delta: number) {
