@@ -25,7 +25,7 @@ export default class App {
   static ActiveEntities: Array<StageObject> = [];
   static SolidBoxColliders: Array<BoxCollider> = [];
   static input: Input;
-  static resolution: number = 4;
+  static resolution: number = 3;
   static mapSize: number = 500;
   static spriteSheet: PIXI.Spritesheet;
   static containerLayers: Array<PIXI.Container>;

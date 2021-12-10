@@ -1,4 +1,5 @@
-import { Container, Graphics, Rectangle } from "pixi.js";
+import { Container, Graphics, Rectangle, BitmapText, Loader } from "pixi.js";
+import { GetText } from "../../../assets/loader";
 import App from "../../appECS";
 
 export default class MessageLarge{
@@ -49,5 +50,6 @@ export default class MessageLarge{
         box.drawRect(0, this.messageHeight - 4, this.messageWidth, 4);
         box.endFill();
         this.messageBox.addChild(box);
+        this.messageBox.addChild(GetText("hello pixi"));
     }
 }

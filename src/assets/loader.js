@@ -16,6 +16,8 @@ import fenceHorzTop from "./images/fence/top/*.png";
 import fenceHorzBottom from "./images/fence/bottom/*.png";
 import villiage_house_small_top from "./images/villiage_house_small/top/*.png";
 import villiage_house_small_bottom from "./images/villiage_house_small/bottom/*.png";
+import early_gameboy from "./fonts/early_gameboy.png";
+import early_gameboy_font from "./fonts/early_gameboy.fnt";
 import * as PIXI from 'pixi.js';
 
 const spriteNames = {
@@ -38,6 +40,22 @@ const spriteNames = {
   villiageHouseSmallTop: Object.values(villiage_house_small_top),
   villiageHouseSmallBottom: Object.values(villiage_house_small_bottom),
 };
+
+export function GetText(text){
+  const loader = new PIXI.Loader();
+  loader.add('Gameboy', "./fonts/early_gameboy.fnt");
+  PIXI.BitmapFont.from("Gameboy", {
+    fill: "#333333",
+    fontSize: 40,
+    fontWeight: 'bold',
+  });
+  
+  const thisText = new PIXI.BitmapText(text, {
+      fontName: 'Gameboy',
+      fontSize: 12
+  });
+  return thisText;
+}
 
 export function GetSprite(name) {
   return new PIXI.AnimatedSprite(
