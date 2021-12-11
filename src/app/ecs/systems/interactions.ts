@@ -28,16 +28,17 @@ export default class Interactions extends System{
             for (let key of Object.keys(ECS._entities)) {
               let entity2 = ECS._entities[key];
               if (entity2.components['interactable'] != undefined && entity2.components['interactable'].canInteract){
-                this.specificInteraction(entity2.components['interactable'].interaction, entity2.components['interactable'].interactMessage);
+                console.log(entity2.components['interactable']);
+                this.specificInteraction(entity2.components['interactable'].interaction, entity2.components['interactable'].interactionTitle, entity2.components['interactable'].interactMessage);
               }
             }
           }
         }
     }
 
-    private specificInteraction(interaction:string, interactMessage:string){
+    private specificInteraction(interaction:string, interactionTitle:string, interactMessage:string){
         switch(interaction){
-            case 'sign': this.signStart(interaction, interactMessage);
+            case 'sign': this.signStart(interactionTitle, interactMessage);
                 break;
             default: break;
         }

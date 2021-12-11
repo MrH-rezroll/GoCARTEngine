@@ -77,7 +77,8 @@ export default class App {
     let player: Entity = CreatePlayer("Player");
     App.activeArrowSprite = CreateActiveArrow("Active Arrow", 16, 16);
     let boulder:Entity = CreateBoulder("Boulder Small 1", 64, 96);
-    let sign:Entity = CreateSign("Sign 1", 15, 64);
+    let sign1:Entity = CreateSign("Sign 1", 15, 64, "Sign A", "I'm a sign. I have possibly \nuseful information.");
+    let sign2:Entity = CreateSign("Sign 2", 96, 64, "Sign B", "The first sign likely had \nmore useful information.");
     let treeElm1:Entity = CreateTreeElm("Tree Elm 1", 32, 32);
     let houseSmall1:Entity = CreateHouseSmall("House Small 1", 192, 52);
     let grass:Entity = CreateGrass("Grass", 1000, 1000);

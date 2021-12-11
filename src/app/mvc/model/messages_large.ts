@@ -20,6 +20,7 @@ export default class MessageLarge{
 
     public showMessageBox(title:string, body:string):void {
         this.bitmapTextTitle.text = title;
+        this.bitmapTextTitle.position.x = this.messageBox.width / 2 - this.bitmapTextTitle.width / 2;
         this.bitmapTextBody.text = body;
         this.messageBox.visible = true;
         this.showMessageLarge = true;
