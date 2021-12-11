@@ -1,33 +1,26 @@
-import { Container, Graphics, Rectangle, BitmapText, Loader } from "pixi.js";
-import { GetText } from "../../../assets/loader";
+import { Container, Graphics, Rectangle, BitmapText, Loader, LoaderResource, BitmapFont, Texture, BaseTexture } from "pixi.js";
 import App from "../../appECS";
 
 export default class MessageLarge{
-    private messageBody:string;
-    private messageTitle:string;
     private messageWidth:number;
     private messageHeight:number;
+    private bitmapTextTitle:BitmapText;
+    private bitmapTextBody:BitmapText;
     messageBox: Container;
     showMessageLarge:boolean;
 
     public constructor(width:number = App._instance.screen.width, height:number = App._instance.screen.height){
         this.messageWidth = width;
         this.messageHeight = height;
-        this.messageTitle = "Title";
-        this.messageBody = "Body";
-        this.showMessageLarge = false;
+        this.showMessageLarge = false;LoaderResource.setExtensionXhrType('fnt', LoaderResource.XHR_RESPONSE_TYPE.TEXT);
+        Loader.shared.add('GameBoy', '../../../assets/images/early_gameboy.fnt');
+        BitmapFont.from('GameBoy', {});
         this.buildMessageBox();
     }
 
-    public SetMessageLargeTitle(title:string):void {
-        this.messageTitle = title;
-    }
-
-    public SetMessageLargeBody(message:string):void {
-        this.messageBody = message;
-    }
-
-    public showMessageBox():void {
+    public showMessageBox(title:string, body:string):void {
+        this.bitmapTextTitle.text = title;
+        this.bitmapTextBody.text = body;
         this.messageBox.visible = true;
         this.showMessageLarge = true;
     }
@@ -45,11 +38,28 @@ export default class MessageLarge{
         box.endFill();
         box.beginFill(0x0f380f);
         box.drawRect(0, 0, this.messageWidth, 4);
+        box.drawRect(0, 24, this.messageWidth, 1);
         box.drawRect(0, 0, 4, this.messageHeight);
         box.drawRect(this.messageWidth - 4, 0, 4, this.messageHeight );
         box.drawRect(0, this.messageHeight - 4, this.messageWidth, 4);
         box.endFill();
         this.messageBox.addChild(box);
-        this.messageBox.addChild(GetText("hello pixi"));
+        this.bitmapTextTitle = new BitmapText("Title", {
+            fontName: 'GameBoy',
+            align: 'center',
+            fontSize: 16
+        });
+        this.bitmapTextTitle.position.x = this.messageBox.width / 2 - this.bitmapTextTitle.width / 2;
+        this.bitmapTextTitle.position.y = 5;
+        this.bitmapTextTitle.maxWidth = this.messageBox.width;
+        this.messageBox.addChild(this.bitmapTextTitle);
+        this.bitmapTextBody = new BitmapText("Body", {
+            fontName: 'GameBoy',
+            fontSize: 12
+        });
+        this.bitmapTextBody.position.x = 5;
+        this.bitmapTextBody.position.y = 26;
+        this.bitmapTextBody.maxWidth = this.messageBox.width - 5;
+        this.messageBox.addChild(this.bitmapTextBody);
     }
 }

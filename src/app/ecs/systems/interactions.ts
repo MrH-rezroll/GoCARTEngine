@@ -37,7 +37,7 @@ export default class Interactions extends System{
 
     private specificInteraction(interaction:string, interactMessage:string){
         switch(interaction){
-            case 'sign': this.signStart(interactMessage);
+            case 'sign': this.signStart(interaction, interactMessage);
                 break;
             default: break;
         }
@@ -77,13 +77,12 @@ export default class Interactions extends System{
         }
     }
 
-    private signStart(interactMessage:string):void {
+    private signStart(title:string, body:string):void {
       if(!App.messageBoxLarge.showMessageLarge){
-        App.messageBoxLarge.showMessageBox();
+        App.messageBoxLarge.showMessageBox(title, body);
       }
       else {
         App.messageBoxLarge.hideMessageBox();
       }
-        console.log("Start Interaction: " + interactMessage);
     }
 }

@@ -16,9 +16,9 @@ import fenceHorzTop from "./images/fence/top/*.png";
 import fenceHorzBottom from "./images/fence/bottom/*.png";
 import villiage_house_small_top from "./images/villiage_house_small/top/*.png";
 import villiage_house_small_bottom from "./images/villiage_house_small/bottom/*.png";
-import early_gameboy from "./fonts/early_gameboy.png";
-import early_gameboy_font from "./fonts/early_gameboy.fnt";
 import * as PIXI from 'pixi.js';
+import early_gameboy_png from "./images/early_gameboy.png";
+import early_gameboy_fnt from "./images/early_gameboy.fnt";
 
 const spriteNames = {
   treeElmTop: Object.values(treeElmTop),
@@ -39,23 +39,11 @@ const spriteNames = {
   fenceHorzBottom: Object.values(fenceHorzBottom),
   villiageHouseSmallTop: Object.values(villiage_house_small_top),
   villiageHouseSmallBottom: Object.values(villiage_house_small_bottom),
+  villiageHouseSmallTop: Object.values(villiage_house_small_top),
+  villiageHouseSmallBottom: Object.values(villiage_house_small_bottom),
+  early_gameboy_png: Object.values(early_gameboy_png),
+  early_gameboy_fnt: Object.values(early_gameboy_fnt)
 };
-
-export function GetText(text){
-  const loader = new PIXI.Loader();
-  loader.add('Gameboy', "./fonts/early_gameboy.fnt");
-  PIXI.BitmapFont.from("Gameboy", {
-    fill: "#333333",
-    fontSize: 40,
-    fontWeight: 'bold',
-  });
-  
-  const thisText = new PIXI.BitmapText(text, {
-      fontName: 'Gameboy',
-      fontSize: 12
-  });
-  return thisText;
-}
 
 export function GetSprite(name) {
   return new PIXI.AnimatedSprite(
