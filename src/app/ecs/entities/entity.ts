@@ -1,6 +1,14 @@
+/**
+ * The base of all Entities
+ * @version 01.01.22
+ * @author MrH-rezroll
+ */
 import { Component } from "../components/component";
 
-export default abstract class Entity{
+/**
+ * Defines the properties required of all Entities, and allows Extending class to be grouped by the Entity type
+ */
+export default class Entity{
     id: string;
     name: string;
     defaultX:number;

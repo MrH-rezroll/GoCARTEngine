@@ -1,12 +1,26 @@
+/**
+ * System to iterate over Entities and perform collision operations as appropriate.
+ * @version 01.01.22
+ * @author MrH-rezroll
+ */
 import { Direction } from "../components/box_collider";
 import BoxCollider from "../components/box_collider";
 import ECS from "../ecs";
 import System from "./system";
 import Entity from "../entities/entity";
 
+/**
+ * Systme for collision checks
+ */
 export default class Collision extends System{
     systemName = "Collision";
 
+    /**
+     * Method to Check for Box Collision between Solid Entities
+     * @param box The box to check all other Entities against.
+     * @param direction The side of the box to check for collision
+     * @returns Reference to Enity that is a match for collision, null reference if there is no collision
+     */
     static BoxColliderOverlaps(box: BoxCollider, direction: Direction = Direction.Any): Entity {
         let foundObject: Entity;
         ECS._entities.forEach(entity => {
@@ -21,6 +35,12 @@ export default class Collision extends System{
         return foundObject;
     }
 
+    /**
+     * Method to Check for Box Overlaps between Trigger Entities
+     * @param box The box to check all other Entities against.
+     * @param direction The side of the box to check for collision
+     * @returns Reference to Enity that is a match for trigger overlap, null reference if there is none found
+     */
     static BoxTriggerOverlaps(box: BoxCollider, ignoreId:string, direction: Direction = Direction.Any): Entity {
         let foundObject: Entity;
         ECS._entities.forEach(entity => {
@@ -35,6 +55,13 @@ export default class Collision extends System{
         return foundObject;
     }
 
+    /**
+     * Alternative Collision method for two BoxCollider Components
+     * @param box1 The first object of a collision
+     * @param box2 The second object of a collision
+     * @param direction The direction in wich the collision occured
+     * @returns true if there is a collison, false if not
+     */
     static Collide(box1: BoxCollider, box2: BoxCollider, direction:Direction = Direction.Any): boolean
     {
         if (box1 == undefined || box2 == undefined) {return false;}

@@ -1,6 +1,14 @@
+/**
+ * Contains data for fullscreen ingame messages
+ * @version 01.01.22
+ * @author MrH-rezroll
+ */
 import { Container, Graphics, BitmapText, Loader, LoaderResource, BitmapFont} from "pixi.js";
 import App from "../../app";
 
+/**
+ * A model for a full screen message box
+ */
 export default class MessageLarge{
     private messageWidth:number;
     private messageHeight:number;
@@ -9,6 +17,11 @@ export default class MessageLarge{
     messageBox: Container;
     showMessageLarge:boolean;
 
+    /**
+     * Creates a new instance of a MessageLarge box
+     * @param width The width of the message box
+     * @param height The height of the message box
+     */
     public constructor(width:number = App._instance.screen.width, height:number = App._instance.screen.height){
         this.messageWidth = width;
         this.messageHeight = height;
@@ -18,6 +31,11 @@ export default class MessageLarge{
         this.buildMessageBox();
     }
 
+    /**
+     * Shows the message box to the player
+     * @param title The title for the message box
+     * @param body The body text of the message box
+     */
     public showMessageBox(title:string, body:string):void {
         this.bitmapTextTitle.text = title;
         this.bitmapTextTitle.position.x = this.messageBox.width / 2 - this.bitmapTextTitle.width / 2;
@@ -26,6 +44,9 @@ export default class MessageLarge{
         this.showMessageLarge = true;
     }
 
+    /**
+     * Turns of the message box visibility
+     */
     public hideMessageBox():void {
         this.messageBox.visible = false;
         this.showMessageLarge = false;

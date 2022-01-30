@@ -1,8 +1,20 @@
+/**
+ * Constucts an animated Tree Entity obstacle
+ * @version 01.01.22
+ * @author MrH-rezroll
+ */
 import BoxCollider from "../components/box_collider";
 import SpriteRenderer from "../components/sprite_renderer";
 import ECS from "../ecs";
 import Entity from "./entity";
 
+/**
+ * Creates an animated Tree Entity obstacle
+ * @param name The name of this Animated Tree Entity
+ * @param x The x axis position of this Entity
+ * @param y The y axis position of this Entity 
+ * @returns The constructed Animated Tree Enitity
+ */
 export function CreateTreeElm(name:string = "Entity", x:number = 0, y: number = 0):Entity {
     let tree: Entity = ECS.Entity(name, x, y);
     tree.addComponent(new SpriteRenderer("treeElmTop", 0, 1));

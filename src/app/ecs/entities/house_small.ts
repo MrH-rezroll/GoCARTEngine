@@ -1,8 +1,20 @@
+/**
+ * Constucts a basic enterable House Entity
+ * @version 01.01.22
+ * @author MrH-rezroll
+ */
 import BoxCollider from "../components/box_collider";
 import SpriteRenderer from "../components/sprite_renderer";
 import ECS from "../ecs";
 import Entity from "./entity";
 
+/**
+ * Creates a solid enterable small House Entity
+ * @param name The name of this House Entity
+ * @param x The x axis positon of this Entity
+ * @param y The y axis position of this Entity
+ * @returns The constructed Small House Entity
+ */
 export function CreateHouseSmall(name:string = "Entity", x:number = 0, y: number = 0):Entity {
     let house: Entity = ECS.Entity(name, x, y);
     house.addComponent(new SpriteRenderer("villiageHouseSmallTop", 0, 2));

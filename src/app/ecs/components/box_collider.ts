@@ -1,7 +1,15 @@
+/**
+ * Provides information about bounding box collisions
+ * @version 01.01.22
+ * @author MrH-rezroll
+ */
 import { Transform } from "pixi.js";
 import Entity from "../entities/entity";
 import { Component } from "./component";
 
+/**
+ * Indicates the side a box will detect collison on
+ */
 export enum Direction {
     Any,
     Bottom,
@@ -10,6 +18,9 @@ export enum Direction {
     Right
 }
 
+/**
+ * Component describing the BoxCollider information for an Entity
+ */
 export default class BoxCollider extends Component{
     isEnabled: boolean = true;
     height: number;

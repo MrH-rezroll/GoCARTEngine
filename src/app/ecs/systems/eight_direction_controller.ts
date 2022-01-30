@@ -1,3 +1,8 @@
+/**
+ * System to iterate over Entities and perform input direction operations as appropriate.
+ * @version 01.01.22
+ * @author MrH-rezroll
+ */
 import App from "../../app";
 import BoxCollider, { Direction } from "../components/box_collider";
 import Collision from "./collision";
@@ -5,6 +10,9 @@ import ECS from "../ecs";
 import System from "./system";
 import Entity from "../entities/entity";
 
+/**
+ * System to hanlde Movement input in eight directions
+ */
 export default class EightDirectionController extends System {
 
     constructor(){
@@ -12,11 +20,9 @@ export default class EightDirectionController extends System {
         EightDirectionController.systemName = "eight_direction_controller";
     }
 
-    public MoveCharacter(transform:PIXI.Transform, speed:number, boxCollider:BoxCollider, entity:Entity){
-        this.moveUpDown(transform, speed, boxCollider, entity);
-        this.moveLeftRight(transform, speed, boxCollider, entity);
-    }
-
+    /**
+     * Iterates Over Entities and Moves Player Controlled Enities as appropriate
+     */
     public Update():void{
       if(!App.messageBoxLarge.showMessageLarge){
         for (let key of Object.keys(ECS._entities)) {
@@ -27,6 +33,11 @@ export default class EightDirectionController extends System {
           }
         }
       }
+    }
+
+    private MoveCharacter(transform:PIXI.Transform, speed:number, boxCollider:BoxCollider, entity:Entity){
+        this.moveUpDown(transform, speed, boxCollider, entity);
+        this.moveLeftRight(transform, speed, boxCollider, entity);
     }
 
     private moveUpDown(transform:PIXI.Transform, speed:number, boxCollider:BoxCollider, entity:Entity){

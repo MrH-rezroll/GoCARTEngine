@@ -1,3 +1,9 @@
+/**
+ * Plain Javascript to load game assets. This will likey be ported to a TypeScript file at a later time.
+ * @version 01.01.22
+ * @author MrH-rezroll
+ */
+
 import treeElmTop from "./images/tree_elm/top/*.png";
 import treeElmBottom from "./images/tree_elm/bottom/*.png";
 import player_move_north from "./images/player/player_move_north/*.png";
@@ -20,6 +26,9 @@ import * as PIXI from 'pixi.js';
 import early_gameboy_png from "./images/early_gameboy.png";
 import early_gameboy_fnt from "./images/early_gameboy.fnt";
 
+/**
+ * The names of sprite assets
+ */
 const spriteNames = {
   treeElmTop: Object.values(treeElmTop),
   treeElmBottom: Object.values(treeElmBottom),
@@ -45,12 +54,22 @@ const spriteNames = {
   early_gameboy_fnt: Object.values(early_gameboy_fnt)
 };
 
+/**
+ * Gets and PIXI AnimatedSprite 
+ * @param {The name of the requested sprite} name 
+ * @returns The requested sprite
+ */
 export function GetSprite(name) {
   return new PIXI.AnimatedSprite(
     spriteNames[name].map((path) => PIXI.Texture.from(path))
   );
 }
 
+/**
+ * Gets and PIXI AnimatedSprite that will be Tiled
+ * @param {The name of the requested sprite} name 
+ * @returns The requested tiled sprite
+ */
 export function GetTiledSprite(name, height, width) {
   let sprite = new PIXI.AnimatedSprite(
     spriteNames[name].map((path) => PIXI.Texture.from(path))

@@ -1,4 +1,8 @@
-
+/**
+ * System to monitor Player input
+ * @version 01.01.22
+ * @author MrH-rezroll
+ */
 export default class Input{
     up: boolean;
     down: boolean;
@@ -52,7 +56,7 @@ export default class Input{
           }
         };
     }
-
+    
     public LateUpdate():void {
       this.action = false;
     }

@@ -1,10 +1,21 @@
+/**
+ * System to iterate over Entities and perform animation switching logic opperations as appropriate. Actual frame animation handled by Pixi
+ * @version 01.01.22
+ * @author MrH-rezroll
+ */
 import ECS from "../ecs";
 import System from "./system";
 import SpriteRenderer from "../components/sprite_renderer";
 
+/**
+ * The Animation Logic System
+ */
 export default class Animation extends System{
     systemName = "Animation";
 
+    /**
+     * Iterate over Enitities and perform animation switching logic where appropriate
+     */
     public Update():void{
         ECS._entities.forEach(entity => {
             for(const currComponent in entity.components){

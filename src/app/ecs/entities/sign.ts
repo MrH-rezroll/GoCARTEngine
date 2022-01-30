@@ -1,9 +1,23 @@
+/**
+ * Constructs an interactible Sign Post Entity
+ * @version 01.01.22
+ * @author MrH-rezroll
+ */
 import BoxCollider from "../components/box_collider";
 import Interactable from "../components/interactable";
 import SpriteRenderer from "../components/sprite_renderer";
 import ECS from "../ecs";
 import Entity from "./entity";
 
+/**
+ * Creates an interactive Sign Post
+ * @param name The name of this Sign Post Entity
+ * @param x The x axis position of this Entity
+ * @param y The y axix position of this Entity
+ * @param title The Title for the Sign Post
+ * @param body The message body of the Sign Post
+ * @returns The constructed Sign Post Entity
+ */
 export function CreateSign(name:string = "Entity", x:number = 0, y: number = 0, title:string="Title", body:string="body"):Entity {
     let boulder: Entity = ECS.Entity(name, x, y);
     boulder.name = "Sign";

@@ -1,3 +1,8 @@
+/**
+ * System to monitor Entities for interactions
+ * @version 01.01.22
+ * @author MrH-rezroll
+ */
 import App from "../../app";
 import ECS from "../ecs";
 import Entity from "../entities/entity";

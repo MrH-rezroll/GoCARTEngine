@@ -1,4 +1,8 @@
-
+/**
+ * Entry point and manager of a goCARTEngine program
+ * @version 01.01.22
+ * @auther MrH-rezroll 
+ */
 import * as PIXI from 'pixi.js';
 import StageObject from './interfaces/stage_object';
 import BoxCollider from './ecs/components/box_collider';
@@ -18,6 +22,9 @@ import { CreatePathLargeHorz } from './ecs/entities/path_large_horz';
 import { CreateFenceHorz } from './ecs/entities/fence_horz';
 import { CreateCliffsTop } from './ecs/entities/cliffs_top';
 
+/**
+ * Entry point
+ */
 export default class App {  
   static _instance: PIXI.Application;
   static GameOver: boolean = false;
@@ -73,8 +80,10 @@ export default class App {
     });
   }
 
+  /**
+   * Setup required before launcing initial game state
+   */
   static SetupGame() {
-    // initial setup of the game state
     this.Stage.removeChildren();
     let player: Entity = CreatePlayer("Player");
     App.activeArrowSprite = CreateActiveArrow("Active Arrow", 16, 16);
@@ -104,6 +113,10 @@ export default class App {
     App.stageScrollY = 0;
   }
 
+  /**
+   * Main game loop logic
+   * @param delta time since last Update
+   */
   static Update(delta: number) {
     ECS.eightDirectionController.Update();
     ECS.animation.Update();
@@ -111,6 +124,10 @@ export default class App {
     ECS.interactions.Update();
   }
 
+  /**
+   * Secondary loop iterates between UpdateLoops
+   * @param delta time since last LateUpdate
+   */
   static LateUpdate(delta: number) {
     ECS.interactions.LateUpdate();
     ECS.input.LateUpdate();

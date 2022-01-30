@@ -1,3 +1,8 @@
+/**
+ * Provides core Enity creation functions and setup/access to Systems
+ * @version 01.01.22
+ * @author MrH-rezroll
+ */
 import Input from "./systems/input";
 import Physics from "./systems/physics";
 import ViewFollow from "./systems/view_follow";
@@ -20,6 +25,9 @@ export default class ECS{
     static animation: Animation;
     static interactions: Interactions;
 
+    /**
+     * Initializes Systems
+     */
     static InitializeSystems(){
         ECS.collision = new Collision();
         ECS.eightDirectionController = new EightDirectionController();
@@ -31,6 +39,13 @@ export default class ECS{
         ECS.interactions = new Interactions();
     }
 
+    /**
+     * Creates the base Entity.
+     * @param name The name of this Entity
+     * @param x The x axis position of this Entity
+     * @param y The y axis position of this Entity
+     * @returns The constructed base Entity
+     */
     static Entity(name:string = "Entity", x:number = 0, y:number = 0): Entity {
         if(ECS._entities == undefined){
             ECS._entities = new Array<Entity>();

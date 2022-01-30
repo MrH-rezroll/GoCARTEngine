@@ -1,8 +1,16 @@
+/**
+ * System to have view track with a specified Entity
+ * @version 01.01.22
+ * @author MrH-rezroll
+ */
 import * as PIXI from 'pixi.js';
 import App from '../../app';
 import ECS from '../ecs';
 import System from './system';
 
+/**
+ * System that visually follows an Entity
+ */
 export default class ViewFollow extends System{
   isEnabled:boolean = true;
     private xOffsetLeft: number;
@@ -16,6 +24,10 @@ export default class ViewFollow extends System{
         ViewFollow.systemName = "view_follow";
     }
 
+    /**
+     * 
+     * @param spriteToFollow The Entity Sprite Compoenent to follow
+     */
     public SetupSpriteToFollow(spriteToFollow: PIXI.Sprite):void {
       this.xOffsetLeft = (App._instance.renderer.view.width / App.resolution)/2 - (spriteToFollow.width / 2);
       this.xOffsetRight = App.mapSize - (App._instance.renderer.view.width / App.resolution)/2 - (spriteToFollow.width / 2);
