@@ -1,8 +1,8 @@
 
 import * as PIXI from 'pixi.js';
 import StageObject from './interfaces/stage_object';
-import BoxCollider from './components/box_collider';
-import SpriteRenderer from './components/sprite_renderer';
+import BoxCollider from './ecs/components/box_collider';
+import SpriteRenderer from './ecs/components/sprite_renderer';
 import ECS from './ecs/ecs';
 import Input from './ecs/systems/input';
 import Entity from './ecs/entities/entity';
