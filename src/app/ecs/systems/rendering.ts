@@ -1,6 +1,6 @@
 import ECS from "../ecs";
 import System from "./system";
-import App from "../../appECS";
+import App from "../../app";
 import SpriteRenderer from "../components/sprite_renderer";
 
 export default class Rendering extends System{

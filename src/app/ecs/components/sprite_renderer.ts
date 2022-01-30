@@ -1,6 +1,6 @@
 import * as PIXI from 'pixi.js';
 import { GetSprite } from '../../../assets/loader';
-import App from '../../appECS';
+import App from '../../app';
 import { Component } from './component';
 
 export default class SpriteRenderer extends Component{

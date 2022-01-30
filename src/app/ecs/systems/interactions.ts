@@ -1,4 +1,4 @@
-import App from "../../appECS";
+import App from "../../app";
 import BoxCollider from "../../components/box_collider";
 import Interactable from "../components/interactable";
 import ECS from "../ecs";

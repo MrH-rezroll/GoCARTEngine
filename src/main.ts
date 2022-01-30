@@ -1,6 +1,5 @@
 import App from "./app/app";
 
-
 const gbHeight = 144;
 const gbWidth = 160
 const gbaHeight = 160;

@@ -1,5 +1,5 @@
 import * as PIXI from 'pixi.js';
-import App from '../../appECS';
+import App from '../../app';
 import ECS from '../ecs';
 import System from './system';
 

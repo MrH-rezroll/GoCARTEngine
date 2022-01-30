@@ -5,9 +5,11 @@ import { Component } from './component';
 export default class SpriteTiledRenderer extends Component{
   isEnabled:boolean = true;
   sprite: PIXI.TilingSprite;
-  constructor(spriteName: string, height: number, width: number){
+  constructor(spriteName: string, height: number, width: number, x: number = 0, y: number = 0){
     super();
     this.componentName = "sprite_tiled_renderer";
     this.sprite = GetTiledSprite(spriteName, width, height);
+    this.sprite.position.x = x;
+    this.sprite.position.y = y;
   }
 }

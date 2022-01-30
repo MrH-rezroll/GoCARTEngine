@@ -1,6 +1,6 @@
 import { Component } from "../components/component";
 
-export default class Entity{
+export default abstract class Entity{
     id: string;
     name: string;
     defaultX:number;

@@ -1,18 +1,23 @@
 
 import * as PIXI from 'pixi.js';
 import StageObject from './interfaces/stage_object';
-import  Player from './entities/player';
-import Input from './components/input';
-import TreeElm from './entities/tree_elm';
 import BoxCollider from './components/box_collider';
-import Grass from './entities/grass';
-import Boulder from './entities/boulder';
-import VilliageHouseSmall from './entities/villiage_house_small';
 import SpriteRenderer from './components/sprite_renderer';
-import CliffsTop from './entities/cliffs_top';
-import PathLargeHorz from './entities/path_large_horz';
-import FenceHorz from './entities/fence_horz';
-import PathLargeT from './entities/path_large_t';
+import ECS from './ecs/ecs';
+import Input from './ecs/systems/input';
+import Entity from './ecs/entities/entity';
+import { CreatePlayer } from './ecs/entities/player';
+import { CreateBoulder } from './ecs/entities/boulder';
+import EightDirectionController from './ecs/systems/eight_direction_controller';
+import { CreateTreeElm } from './ecs/entities/tree_elm';
+import { CreateHouseSmall } from './ecs/entities/house_small';
+import { CreateGrass } from './ecs/entities/grass';
+import { CreateSign } from './ecs/entities/sign';
+import MessageLarge from './mvc/model/messages_large';
+import { CreateActiveArrow } from './ecs/entities/active_arrow';
+import { CreatePathLargeHorz } from './ecs/entities/path_large_horz';
+import { CreateFenceHorz } from './ecs/entities/fence_horz';
+import { CreateCliffsTop } from './ecs/entities/cliffs_top';
 
 export default class App {  
   static _instance: PIXI.Application;
@@ -23,10 +28,15 @@ export default class App {
   static ActiveEntities: Array<StageObject> = [];
   static SolidBoxColliders: Array<BoxCollider> = [];
   static input: Input;
-  static resolution: number = 4;
+  static resolution: number = 3;
   static mapSize: number = 500;
   static spriteSheet: PIXI.Spritesheet;
   static containerLayers: Array<PIXI.Container>;
+  static uiContainer: PIXI.Container;
+  static messageBoxLarge: MessageLarge;
+  static activeArrowSprite: Entity;
+  static stageScrollX: number;
+  static stageScrollY: number;
   
   constructor(
     parent: HTMLElement,
@@ -54,104 +64,56 @@ export default class App {
     parent.replaceChild(App._instance.view, parent.lastElementChild);
 
     App.SetupGame();
-    App.ActiveEntities.forEach(entity => {
-      if (entity.Start) entity.Start();
-    });
 
     // this is the ticker that runs once per frame, let's call our Update() function
     App._instance.ticker.add((delta) => {
-      App.ActiveEntities.forEach(gameObject => {
-        if (gameObject.Update) gameObject.Update();
-      });
-      App.ActiveEntities.forEach(gameObject => {
-        if (gameObject.LateUpdate) gameObject.LateUpdate();
-      });
       App.Update(delta);
+      App.uiContainer.position.y = -App.Stage.position.y;
+      App.uiContainer.position.x = -App.Stage.position.x;
+      App.LateUpdate(delta);
     });
   }
 
   static SetupGame() {
     // initial setup of the game state
-    this.ActiveEntities = new Array<StageObject>();
     this.Stage.removeChildren();
+    let player: Entity = CreatePlayer("Player");
+    App.activeArrowSprite = CreateActiveArrow("Active Arrow", 16, 16);
+    let boulder:Entity = CreateBoulder("Boulder Small 1", 132, 56);
+    let sign1:Entity = CreateSign("Sign 1", 15, 64, "Sign A", "I'm a sign. I have possibly \nuseful information.");
+    let sign2:Entity = CreateSign("Sign 2", 96, 64, "Sign B", "The first sign likely had \nmore useful information.");
+    let treeElm1:Entity = CreateTreeElm("Tree Elm 1", 32, 32);
+    let treeElm2:Entity = CreateTreeElm("Tree Elm 2", 232, 16);
+    let treeElm3:Entity = CreateTreeElm("Tree Elm 3", 48, 8);
+    let houseSmall1:Entity = CreateHouseSmall("House Small 1", 172, 12);
+    let fence1:Entity = CreateFenceHorz("Fence Horz", 132, 112);
+    let fence2:Entity = CreateFenceHorz("Fence Horz", 256, 64);
+    let grass:Entity = CreateGrass("Grass", 1000, 1000);
+    let path1:Entity = CreatePathLargeHorz("Large Path 1", 64, 1000, 0, 68);
+    let cliffs:Entity = CreateCliffsTop("Cliffs", 48, 1000, 0, -32);
 
-    let grass = new Grass();
-    App.ActiveEntities.push(grass);
-    App.Stage.addChild(grass.spriteTiledRenderer().sprite);
+    ECS.InitializeSystems();
+    ECS.viewFollow.SetupSpriteToFollow(player.components['sprite_renderer'].sprite);
+    ECS.rendering.SetupSprites();
 
-    let cliffsTop = new CliffsTop();
-    App.ActiveEntities.push(cliffsTop);
-    App.Stage.addChild(cliffsTop.spriteTiledRenderer().sprite);
-
-    let pathLageHorz = new PathLargeHorz(64, 1000);
-    pathLageHorz.transform.position.y = 196
-    App.ActiveEntities.push(pathLageHorz);
-    App.Stage.addChild(pathLageHorz.spriteTiledRenderer().sprite);
-
-    let pathLageHorz2 = new PathLargeHorz(64, 48);
-    pathLageHorz2.prefabPosition(256, 148);
-    pathLageHorz2.spriteTiledRenderer().sprite.angle = 90;
-    pathLageHorz2.spriteTiledRenderer().sprite.scale.y = -1;
-    App.ActiveEntities.push(pathLageHorz2);
-    App.Stage.addChild(pathLageHorz2.spriteTiledRenderer().sprite);
-
-    let pathLargeT = new PathLargeT();
-    pathLargeT.prefabPosition(320, 260);
-    pathLargeT.spriteRenderer().sprite.angle = 180;
-    App.ActiveEntities.push(pathLargeT);
-
-    let boulder1 = new Boulder();
-    boulder1.spriteRenderer().sprite.x = 64;
-    boulder1.spriteRenderer().sprite.y = 96;
-    App.ActiveEntities.push(boulder1);
-
-    let fencHorz1 = new FenceHorz();
-    fencHorz1.prefabPosition(72, 192);
-    App.ActiveEntities.push(fencHorz1);
-
-    let fencHorz2 = new FenceHorz();
-    fencHorz2.prefabPosition(196, 192);
-    App.ActiveEntities.push(fencHorz2);
-
-    let fencHorz3 = new FenceHorz();
-    fencHorz3.prefabPosition(314, 192);
-    App.ActiveEntities.push(fencHorz3);
-
-    let villiageHouseSmall2 = new VilliageHouseSmall();
-    villiageHouseSmall2.prefabPosition(148, 126);
-    App.ActiveEntities.push(villiageHouseSmall2);
-
-    let player = new Player();
-    player.spriteRenderer().sprite.x = 0;
-    player.spriteRenderer().sprite.y = 0;
-    player.spriteRenderer().sprite.animationSpeed = 0.05;
-    player.spriteRenderer().sprite.play();
-    App.ActiveEntities.push(player);
-
-    let villiageHouseSmall1 = new VilliageHouseSmall();
-    villiageHouseSmall1.prefabPosition(192, 52);
-    App.ActiveEntities.push(villiageHouseSmall1);
-
-    let treeElm3 = new TreeElm(-0.025);
-    treeElm3.prefabPosition(116, 60);
-    App.ActiveEntities.push(treeElm3);
-
-    let treeElm1 = new TreeElm();
-    treeElm1.prefabPosition(100, 84);
-    App.ActiveEntities.push(treeElm1);
-
-    let treeElm2 = new TreeElm();
-    treeElm2.prefabPosition(50, 57);
-    App.ActiveEntities.push(treeElm2);
-
-    App.containerLayers.forEach(containerLayer => {
-      App.Stage.addChild(containerLayer);
-    });
+    App.uiContainer = new PIXI.Container();
+    App.messageBoxLarge = new MessageLarge();
+    App.uiContainer.addChild(this.messageBoxLarge.messageBox);
+    App.Stage.addChild(this.uiContainer);
+    App.messageBoxLarge.hideMessageBox();
+    App.stageScrollX = 0;
+    App.stageScrollY = 0;
   }
 
   static Update(delta: number) {
-    // simulate game, update entities and world
-      // frame is ending, so let's set PressedSpace back to false
-    // so that it is the default on the next frame
+    ECS.eightDirectionController.Update();
+    ECS.animation.Update();
+    ECS.viewFollow.Update();
+    ECS.interactions.Update();
+  }
+
+  static LateUpdate(delta: number) {
+    ECS.interactions.LateUpdate();
+    ECS.input.LateUpdate();
   }
 }

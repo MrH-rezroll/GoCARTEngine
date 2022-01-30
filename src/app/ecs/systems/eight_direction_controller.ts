@@ -1,4 +1,4 @@
-import App from "../../appECS";
+import App from "../../app";
 import BoxCollider, { Direction } from "../components/box_collider";
 import Collision from "./collision";
 import ECS from "../ecs";
