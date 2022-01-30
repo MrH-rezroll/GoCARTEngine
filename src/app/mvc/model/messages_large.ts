@@ -1,4 +1,4 @@
-import { Container, Graphics, Rectangle, BitmapText, Loader, LoaderResource, BitmapFont, Texture, BaseTexture } from "pixi.js";
+import { Container, Graphics, BitmapText, Loader, LoaderResource, BitmapFont} from "pixi.js";
 import App from "../../app";
 
 export default class MessageLarge{

@@ -1,6 +1,4 @@
-import App from "../../app";
 import BoxCollider from "../components/box_collider";
-import EightDirectionController from "../systems/eight_direction_controller";
 import Health from "../components/health";
 import SpriteRenderer from "../components/sprite_renderer";
 import ECS from "../ecs";

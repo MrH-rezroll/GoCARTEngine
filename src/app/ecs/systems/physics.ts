@@ -1,4 +1,3 @@
-import ECS from "../ecs";
 import System from "./system"
 
 export default class Physics extends System{

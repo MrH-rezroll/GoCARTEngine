@@ -1,4 +1,3 @@
-import BoxCollider from "../components/box_collider";
 import SpriteRenderer from "../components/sprite_renderer";
 import ECS from "../ecs";
 import Entity from "./entity";

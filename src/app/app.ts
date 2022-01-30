@@ -8,7 +8,6 @@ import Input from './ecs/systems/input';
 import Entity from './ecs/entities/entity';
 import { CreatePlayer } from './ecs/entities/player';
 import { CreateBoulder } from './ecs/entities/boulder';
-import EightDirectionController from './ecs/systems/eight_direction_controller';
 import { CreateTreeElm } from './ecs/entities/tree_elm';
 import { CreateHouseSmall } from './ecs/entities/house_small';
 import { CreateGrass } from './ecs/entities/grass';

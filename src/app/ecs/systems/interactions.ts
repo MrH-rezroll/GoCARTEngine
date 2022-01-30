@@ -1,6 +1,4 @@
 import App from "../../app";
-import BoxCollider from "../../components/box_collider";
-import Interactable from "../components/interactable";
 import ECS from "../ecs";
 import Entity from "../entities/entity";
 import Collision from "./collision";
@@ -28,7 +26,7 @@ export default class Interactions extends System{
             for (let key of Object.keys(ECS._entities)) {
               let entity2 = ECS._entities[key];
               if (entity2.components['interactable'] != undefined && entity2.components['interactable'].canInteract){
-                console.log(entity2.components['interactable']);
+                //console.log(entity2.components['interactable']);
                 this.specificInteraction(entity2.components['interactable'].interaction, entity2.components['interactable'].interactionTitle, entity2.components['interactable'].interactMessage);
               }
             }
